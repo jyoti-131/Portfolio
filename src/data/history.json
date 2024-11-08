@@ -1,0 +1,22 @@
+[
+    {
+      "role": "Summer Intern",
+      "organization": "Indian Institute of Technology Ropar",
+      "startDate": "May 2024",
+      "endDate": "July 2024",
+      "experiences": [
+        "Worked on Articulation Meter"
+      ],
+      "imageSrc": "/iit.png"
+    },
+    {
+      "role": "MERN Stack Development Intern",
+      "organization": "Medgloss",
+      "startDate": "Oct 2024",
+      "endDate": "Present",
+      "experiences": [
+        "Worked on Medical education source"
+      ],
+      "imageSrc": "/Group 1.png"
+    }
+  ]

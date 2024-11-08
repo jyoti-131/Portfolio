@@ -1,0 +1,222 @@
+@import '../../vars.css';
+
+:root {
+  --footer-gradient: linear-gradient(135deg, rgba(72, 61, 139, 0.05) 0%, rgba(147, 112, 219, 0.08) 100%);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.footer {
+  width: 100%;
+  padding: 2rem 0;
+  background: var(--footer-gradient);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(147, 112, 219, 0.1);
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--transition-bounce);
+}
+
+.glowBackground {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, 
+    rgba(72, 61, 139, 0.1), 
+    rgba(147, 112, 219, 0.1), 
+    rgba(72, 61, 139, 0.1));
+  background-size: 200% 100%;
+  animation: gradientMove 15s ease infinite;
+}
+
+.topBlur {
+  position: absolute;
+  width: 50vw;
+  height: 30vw;
+  min-width: 350px;
+  min-height: 200px;
+  top: -50px;
+  left: 10vw;
+  border-radius: 764px;
+  background: rgba(72, 61, 139, 0.2);
+  filter: blur(100px);
+  z-index: 0;
+  animation: pulseTop 10s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+.bottomBlur {
+  position: absolute;
+  width: 70vw;
+  height: 30vw;
+  min-width: 350px;
+  min-height: 150px;
+  bottom: -50px;
+  right: -25vw;
+  border-radius: 764px;
+  background: rgba(147, 112, 219, 0.3);
+  filter: blur(120px);
+  z-index: 0;
+  animation: pulseBottom 8s ease-in-out infinite;
+  mix-blend-mode: multiply;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.socialLink {
+  position: relative;
+  color: #483D8B;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.4s var(--transition-bounce);
+  padding: 0.5rem;
+}
+
+.icon {
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s var(--transition-bounce);
+}
+
+.socialLink:hover .icon {
+  color: #9370DB;
+  transform: scale(1.1) translateY(-2px);
+}
+
+.iconGlow {
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(90deg, #483D8B 0%, #9370DB 100%);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.socialLink:hover .iconGlow {
+  opacity: 0.3;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  color: #483D8B;
+  transition: all 0.4s var(--transition-bounce);
+  font-family: var(--font-roboto);
+  text-align: center;
+}
+
+.copyright:hover {
+  color: #9370DB;
+  transform: translateY(-1px);
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseTop {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1) rotate(15deg);
+    opacity: 0.5;
+    filter: blur(120px);
+  }
+}
+
+@keyframes pulseBottom {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.2) rotate(-15deg);
+    opacity: 0.5;
+    filter: blur(140px);
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .footer {
+    padding: 1.5rem 0;
+  }
+  
+  .socialLinks {
+    gap: 1.5rem;
+  }
+  
+  .content {
+    padding: 0 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 1rem 0;
+  }
+  
+  .socialLinks {
+    gap: 1rem;
+  }
+  
+  .content {
+    padding: 0 1rem;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer,
+  .socialLink,
+  .icon,
+  .iconGlow,
+  .copyright,
+  .topBlur,
+  .bottomBlur {
+    animation: none;
+    transition: none;
+  }
+  
+  .glowBackground {
+    animation: none;
+  }
+  
+  .socialLink:hover .icon,
+  .copyright:hover {
+    transform: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .footer {
+    background: rgba(72, 61, 139, 0.05);
+  }
+}

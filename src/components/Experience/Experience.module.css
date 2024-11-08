@@ -1,0 +1,406 @@
+@import '../../vars.css';
+
+:root {
+  --exp-gradient: linear-gradient(135deg, rgba(72, 61, 139, 0.05) 0%, rgba(147, 112, 219, 0.08) 100%);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.container {
+  position: relative;
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+  max-width: 87.5rem;
+  scroll-margin-top: 6.25rem;
+  width: 100%;
+}
+
+/* Updated background pattern with new colors */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(72, 61, 139, 0.1) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, rgba(147, 112, 219, 0.1) 2%, transparent 0%);
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.title {
+  color: var(--color-text);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.0625rem;
+  text-transform: uppercase;
+  margin-bottom: clamp(2rem, 4vw, 3.75rem);
+  text-align: center;
+  background: linear-gradient(90deg, #483D8B, #9370DB, #483D8B);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 8s infinite linear;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #483D8B, transparent);
+  border-radius: 2px;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -31.25rem;
+  }
+  100% {
+    background-position: 31.25rem;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.75rem);
+  position: relative;
+}
+
+/* Skills Section */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(6.25rem, 100%), 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  width: 100%;
+  max-width: 62.5rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  perspective: 1000px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.skill:nth-child(n) {
+  animation-delay: calc(0.1s * var(--index, 0));
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skillImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3.75rem, 8vw, 5.625rem);
+  height: clamp(3.75rem, 8vw, 5.625rem);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background: rgba(72, 61, 139, 0.8);
+  backdrop-filter: blur(0.625rem);
+  box-shadow: 
+    0 0.5rem 2rem rgba(72, 61, 139, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.skillImageContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(147, 112, 219, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.skillImageContainer:hover::before {
+  left: 100%;
+}
+
+.skillImageContainer:hover {
+  transform: translateY(-0.3125rem) rotateX(10deg) rotateY(10deg);
+  box-shadow: 
+    0 0.75rem 2.5rem rgba(72, 61, 139, 0.25),
+    inset 0 0 0 1px rgba(147, 112, 219, 0.3);
+}
+
+.skillImage {
+  width: clamp(2rem, 4vw, 3rem);
+  height: clamp(2rem, 4vw, 3rem);
+  object-fit: contain;
+  filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.skillImageContainer:hover .skillImage {
+  transform: scale(1.1);
+}
+
+.skillTitle {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 500;
+  color: var(--color-text);
+  opacity: 0.9;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.skill:hover .skillTitle {
+  color: #483D8B;
+}
+
+/* History Section */
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.historyItem {
+  display: flex;
+  gap: clamp(1.25rem, 2vw, 2rem);
+  background: rgba(72, 61, 139, 0.08);
+  backdrop-filter: blur(0.625rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 1rem;
+  transition: all 0.4s var(--transition-bounce);
+  border: 0.0625rem solid rgba(147, 112, 219, 0.1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0.5rem 1.5rem rgba(72, 61, 139, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: slideIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.historyItem:nth-child(n) {
+  animation-delay: calc(0.2s * var(--index, 0));
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.historyItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(147, 112, 219, 0.03), transparent);
+  transition: 0.5s;
+}
+
+.historyItem:hover {
+  transform: translateY(-0.3125rem) scale(1.01);
+  box-shadow: 
+    0 1.25rem 2.5rem rgba(72, 61, 139, 0.15),
+    inset 0 0 0 1px rgba(147, 112, 219, 0.2);
+  border-color: rgba(147, 112, 219, 0.2);
+}
+
+.historyImageContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: clamp(0.5rem, 1vw, 0.75rem);
+  background: rgba(72, 61, 139, 0.05);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(0.3125rem);
+  transition: all 0.4s var(--transition-bounce);
+  border: 1px solid rgba(147, 112, 219, 0.1);
+}
+
+.historyItem:hover .historyImageContainer {
+  background: rgba(147, 112, 219, 0.1);
+  border-color: rgba(147, 112, 219, 0.2);
+}
+
+.historyImage {
+  width: clamp(2.5rem, 5vw, 3.75rem);
+  height: clamp(2.5rem, 5vw, 3.75rem);
+  object-fit: contain;
+  filter: drop-shadow(0 0.125rem 0.25rem rgba(72, 61, 139, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.historyItem:hover .historyImage {
+  transform: scale(1.05);
+}
+
+.historyDetails {
+  flex: 1;
+}
+
+.historyHeader {
+  margin-bottom: clamp(1rem, 2vw, 1.25rem);
+  position: relative;
+}
+
+.historyRole {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: #483D8B;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #483D8B, #9370DB);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.historyRole::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #9370DB;
+  transition: width 0.3s ease;
+}
+
+.historyItem:hover .historyRole::after {
+  width: 100%;
+}
+
+.historyDate {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 400;
+  color: #483D8B;
+  opacity: 0.7;
+  letter-spacing: 0.03125rem;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  list-style-type: none;
+  margin-left: 0;
+  color: #483D8B;
+}
+
+.historyListItem {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 300;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.historyListItem:hover {
+  transform: translateX(0.3125rem);
+}
+
+.historyListItem::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #9370DB;
+  transition: transform 0.3s ease;
+}
+
+.historyListItem:hover::before {
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 64rem) {
+  .historyItem {
+    flex-direction: column;
+  }
+  
+  .historyImageContainer {
+    align-self: flex-start;
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .container {
+    margin-top: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .content {
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .container {
+    margin-top: 2rem;
+  }
+  
+  .skills {
+    grid-template-columns: repeat(auto-fill, minmax(4.375rem, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .content,
+  .historyItem,
+  .skillImageContainer,
+  .historyImageContainer,
+  .historyRole,
+  .historyListItem {
+    transition: none;
+  }
+
+  .skill,
+  .historyItem {
+    animation: none;
+    opacity: 1;
+  }
+
+  .historyItem:hover,
+  .skillImageContainer:hover,
+  .historyImageContainer:hover,
+  .historyListItem:hover {
+    transform: none;
+  }
+}
